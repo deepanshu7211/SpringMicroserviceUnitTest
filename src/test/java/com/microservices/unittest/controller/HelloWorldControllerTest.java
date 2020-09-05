@@ -30,4 +30,20 @@ public class HelloWorldControllerTest {
 //        Verification of the Response
         Assertions.assertEquals("Hello World",mvcResult.getResponse().getContentAsString());
     }
+
+    @Test
+    public void testPostHelloWorld_basic() throws Exception {
+        //call /hello-world Get and application/Json
+        RequestBuilder request = MockMvcRequestBuilders.post("/hello-world")
+                .content("hello-world from post")
+                .accept(MediaType.APPLICATION_JSON);
+
+        MvcResult mvcResult = mockMvc.perform(request)
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().string("hello-world from post"))
+                .andReturn();
+
+//        Verification of the Response
+//        Assertions.assertEquals("Hello World",mvcResult.getResponse().getContentAsString());
+    }
 }
